@@ -1,4 +1,11 @@
-Receta de Desayuno: Huevos con Chorizo y Tortillas.
-Receta de Cena: Sándwich de Jamón con mucho Queso.
-Receta de Postre: Fresas con Crema y Azúcar.
-Receta de Panqueques Saludables: Avena, Huevos, Polvo de Hornear,Banano.
+Receta de Desayuno: Huevos con Chorizo.
+Ingredientes: Huevos, chorizo, sal.
+Pasos: Freír el chorizo y agregar huevos.
+---
+Receta de Postre: Fresas con Crema.
+Ingredientes: Fresas, crema, azúcar.
+Pasos: Lavar fresas y mezclar.
+---
+Receta Panqueques Saludables: Panqueques de Avena.
+Ingredientes: Avena,Banano,Huevo,Polvo de Hornear.
+Pasos: Mezclar Avena con Huevo y un Banano agregar un poco de polvo de hornear y licuar hasta tener una masa para preparar en sarten.

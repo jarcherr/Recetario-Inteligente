@@ -1,29 +1,34 @@
 import os
 
 def generar_receta_ia(ingredientes_usuario: str):
-    # Ruta al archivo de recetas
-    ruta_recetas = os.path.join("..", "data", "recetas_locales.txt")
-    
     try:
-        with open(ruta_recetas, "r", encoding="utf-8") as f:
-            contenido = f.read()
+        base_path = os.path.dirname(__file__)
+        ruta_txt = os.path.join(base_path, "..", "data", "recetas_locales.txt")
         
-        # Lógica de búsqueda simple (Simulando RAG)
-        # Dividimos el archivo por líneas para buscar
-        recetas = contenido.split("\n")
-        encontradas = [r for r in recetas if ingredientes_usuario.lower() in r.lower()]
+        with open(ruta_txt, "r", encoding="utf-8") as f:
+            # Dividimos el archivo en recetas individuales usando '---' como separador
+            biblioteca_recetas = f.read().split("---") 
 
-        if encontradas:
-            return {
-                "receta": encontradas[0],
-                "info": "Encontrada en tu base de datos local",
-                "status": "success"
-            }
+        busqueda = ingredientes_usuario.lower().strip()
+        receta_seleccionada = None
+        
+        # Buscamos la receta que contenga el ingrediente
+        for receta in biblioteca_recetas:
+            if busqueda in receta.lower():
+                receta_seleccionada = receta.strip()
+                break # Detenemos la búsqueda al encontrar la primera coincidencia
+        
+        if receta_seleccionada:
+            # Solo enviamos la receta encontrada, no todo el archivo
+            mensaje = receta_seleccionada
         else:
-            return {
-                "receta": "No encontré nada exacto, pero te sugiero un Omelet.",
-                "info": "Sugerencia general de la IA",
-                "status": "not_found"
-            }
-    except FileNotFoundError:
-        return {"error": "No se encontró la base de datos de recetas."}
+            mensaje = f"No encontré una receta específica con '{ingredientes_usuario}'. Intenta con ingredientes base como 'huevo', 'fresa' o 'avena'."
+
+        return {
+            "receta": mensaje,
+            "info": "Motor RAG Local (Modo Compatibilidad Python 3.14)",
+            "status": "success"
+        }
+
+    except Exception as e:
+        return {"receta": f"Error: {str(e)}", "status": "error"}
